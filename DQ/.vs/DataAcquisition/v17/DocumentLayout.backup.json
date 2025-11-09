@@ -1,0 +1,147 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\usama\\Source\\repos\\UpWork\\data-acquisition\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5F7AD7D9-93F4-47EC-8D42-CD4B41F8C437}|DataAcquisition\\DataAcquisition.csproj|c:\\users\\usama\\source\\repos\\upwork\\data-acquisition\\dataacquisition\\services\\dataacquisition.cs||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{5F7AD7D9-93F4-47EC-8D42-CD4B41F8C437}|DataAcquisition\\DataAcquisition.csproj|solutionrelative:dataacquisition\\services\\dataacquisition.cs||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F7AD7D9-93F4-47EC-8D42-CD4B41F8C437}|DataAcquisition\\DataAcquisition.csproj|c:\\users\\usama\\source\\repos\\upwork\\data-acquisition\\dataacquisition\\windows\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F7AD7D9-93F4-47EC-8D42-CD4B41F8C437}|DataAcquisition\\DataAcquisition.csproj|solutionrelative:dataacquisition\\windows\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F7AD7D9-93F4-47EC-8D42-CD4B41F8C437}|DataAcquisition\\DataAcquisition.csproj|c:\\users\\usama\\source\\repos\\upwork\\data-acquisition\\dataacquisition\\entities\\portsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F7AD7D9-93F4-47EC-8D42-CD4B41F8C437}|DataAcquisition\\DataAcquisition.csproj|solutionrelative:dataacquisition\\entities\\portsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F7AD7D9-93F4-47EC-8D42-CD4B41F8C437}|DataAcquisition\\DataAcquisition.csproj|c:\\users\\usama\\source\\repos\\upwork\\data-acquisition\\dataacquisition\\windows\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{5F7AD7D9-93F4-47EC-8D42-CD4B41F8C437}|DataAcquisition\\DataAcquisition.csproj|solutionrelative:dataacquisition\\windows\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F7AD7D9-93F4-47EC-8D42-CD4B41F8C437}|DataAcquisition\\DataAcquisition.csproj|c:\\users\\usama\\source\\repos\\upwork\\data-acquisition\\dataacquisition\\entities\\applicationsettings.cs||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{5F7AD7D9-93F4-47EC-8D42-CD4B41F8C437}|DataAcquisition\\DataAcquisition.csproj|solutionrelative:dataacquisition\\entities\\applicationsettings.cs||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F7AD7D9-93F4-47EC-8D42-CD4B41F8C437}|DataAcquisition\\DataAcquisition.csproj|c:\\users\\usama\\source\\repos\\upwork\\data-acquisition\\dataacquisition\\settings\\constants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F7AD7D9-93F4-47EC-8D42-CD4B41F8C437}|DataAcquisition\\DataAcquisition.csproj|solutionrelative:dataacquisition\\settings\\constants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F7AD7D9-93F4-47EC-8D42-CD4B41F8C437}|DataAcquisition\\DataAcquisition.csproj|c:\\users\\usama\\source\\repos\\upwork\\data-acquisition\\dataacquisition\\entities\\stopbits.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F7AD7D9-93F4-47EC-8D42-CD4B41F8C437}|DataAcquisition\\DataAcquisition.csproj|solutionrelative:dataacquisition\\entities\\stopbits.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Constants.cs",
+              "DocumentMoniker": "C:\\Users\\usama\\Source\\repos\\UpWork\\data-acquisition\\DataAcquisition\\Settings\\Constants.cs",
+              "RelativeDocumentMoniker": "DataAcquisition\\Settings\\Constants.cs",
+              "ToolTip": "C:\\Users\\usama\\Source\\repos\\UpWork\\data-acquisition\\DataAcquisition\\Settings\\Constants.cs",
+              "RelativeToolTip": "DataAcquisition\\Settings\\Constants.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAADEAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-26T09:12:28.509Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PortSettings.cs",
+              "DocumentMoniker": "C:\\Users\\usama\\Source\\repos\\UpWork\\data-acquisition\\DataAcquisition\\Entities\\PortSettings.cs",
+              "RelativeDocumentMoniker": "DataAcquisition\\Entities\\PortSettings.cs",
+              "ToolTip": "C:\\Users\\usama\\Source\\repos\\UpWork\\data-acquisition\\DataAcquisition\\Entities\\PortSettings.cs",
+              "RelativeToolTip": "DataAcquisition\\Entities\\PortSettings.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABYAAAB8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-27T06:33:05.303Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DataAcquisition.cs",
+              "DocumentMoniker": "C:\\Users\\usama\\Source\\repos\\UpWork\\data-acquisition\\DataAcquisition\\Services\\DataAcquisition.cs",
+              "RelativeDocumentMoniker": "DataAcquisition\\Services\\DataAcquisition.cs",
+              "ToolTip": "C:\\Users\\usama\\Source\\repos\\UpWork\\data-acquisition\\DataAcquisition\\Services\\DataAcquisition.cs",
+              "RelativeToolTip": "DataAcquisition\\Services\\DataAcquisition.cs",
+              "ViewState": "AgIAAHkAAAAAAAAAAAAAAIUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-10T14:55:12.591Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\usama\\Source\\repos\\UpWork\\data-acquisition\\DataAcquisition\\Windows\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "DataAcquisition\\Windows\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\usama\\Source\\repos\\UpWork\\data-acquisition\\DataAcquisition\\Windows\\MainWindow.xaml.cs",
+              "RelativeToolTip": "DataAcquisition\\Windows\\MainWindow.xaml.cs",
+              "ViewState": "AgIAANICAAAAAAAAAAAAAN4CAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-26T09:23:24.062Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\usama\\Source\\repos\\UpWork\\data-acquisition\\DataAcquisition\\Windows\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "DataAcquisition\\Windows\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\usama\\Source\\repos\\UpWork\\data-acquisition\\DataAcquisition\\Windows\\MainWindow.xaml",
+              "RelativeToolTip": "DataAcquisition\\Windows\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-08-29T13:16:29.637Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "StopBits.cs",
+              "DocumentMoniker": "C:\\Users\\usama\\Source\\repos\\UpWork\\data-acquisition\\DataAcquisition\\Entities\\StopBits.cs",
+              "RelativeDocumentMoniker": "DataAcquisition\\Entities\\StopBits.cs",
+              "ToolTip": "C:\\Users\\usama\\Source\\repos\\UpWork\\data-acquisition\\DataAcquisition\\Entities\\StopBits.cs",
+              "RelativeToolTip": "DataAcquisition\\Entities\\StopBits.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-29T12:42:30.608Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ApplicationSettings.cs",
+              "DocumentMoniker": "C:\\Users\\usama\\Source\\repos\\UpWork\\data-acquisition\\DataAcquisition\\Entities\\ApplicationSettings.cs",
+              "RelativeDocumentMoniker": "DataAcquisition\\Entities\\ApplicationSettings.cs",
+              "ToolTip": "C:\\Users\\usama\\Source\\repos\\UpWork\\data-acquisition\\DataAcquisition\\Entities\\ApplicationSettings.cs",
+              "RelativeToolTip": "DataAcquisition\\Entities\\ApplicationSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-10T10:17:39.641Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

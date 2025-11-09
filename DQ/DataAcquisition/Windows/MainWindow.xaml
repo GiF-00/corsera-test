@@ -1,0 +1,396 @@
+﻿<Window x:Class="DataAcquisition.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DataAcquisition"
+        mc:Ignorable="d"
+        FontSize="14"
+        Title="Data Acquisition"
+        Height="500" MinHeight="500"
+        Width="800" MinWidth="800"
+        Closing="OnClosing" SizeChanged="OnSizeChanged" StateChanged="OnStateChanged" LocationChanged="OnLocationChanged" Loaded="OnLoaded">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MinWidth="180" MaxWidth="300"/>
+            <ColumnDefinition Width="8"/>
+            <ColumnDefinition Width="5*" MinWidth="400"/>
+            <ColumnDefinition Width="8"/>
+            <ColumnDefinition Width="2*" MinWidth="200" MaxWidth="600"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Vertical Splitters -->
+        <GridSplitter Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,5,0,2" Background="#80F3F3F3" />
+        <GridSplitter Grid.Row="2" Grid.Column="3" HorizontalAlignment="Stretch" Margin="0,5,0,2" Background="#80F3F3F3" />
+
+        <!-- Top Menu -->
+        <Menu x:Name="menu" Grid.Row="0" Margin="2,2,2,2" Background="{x:Null}" Grid.ColumnSpan="5">
+            <MenuItem Header="Settings">
+                <MenuItem Header="Port Settings" Click="OnPortSettingsClicked" />
+                <MenuItem Header="Manage experiments" Click="OnManageExperimentsClicked"/>
+                <MenuItem Header="Update password" Click="OnUpdatePasswordClicked"/>
+            </MenuItem>
+            <MenuItem Header="About" Click="About_Click" />
+        </Menu>
+
+        <!-- Top Bar -->
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="3">
+            <!-- Port -->
+            <TextBlock Text="Port: " VerticalAlignment="Center" Margin="2,2,2,2"/>
+            <ComboBox x:Name="SerialPortComboBox" VerticalAlignment="Stretch" Width="120" Margin="0,2,5,2" SelectionChanged="OnSerialPortSelectionChanged" />
+
+            <!-- Device Address -->
+            <TextBlock Text="Device Address: " VerticalAlignment="Center" Margin="10,2,2,2"/>
+            <TextBox x:Name="DeviceAddress" VerticalContentAlignment="Center" VerticalAlignment="Stretch" Width="100" Margin="0,2,5,2" TextChanged="DeviceAddressTextChanged" />
+
+            <!-- Start / Stop Button -->
+            <Button x:Name="StartStopButton" Content="Start" VerticalAlignment="Stretch" Width="100" Margin="10,2,2,2" Click="StartStopButtonClicked"/>
+        </StackPanel>
+
+        <!-- Central Data Area -->
+        <Grid Grid.Row="2" Grid.Column="2" Margin="2,5,2,2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Control Panel -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <StackPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Width" Value="120" />
+                        <Setter Property="Margin" Value="2,2,2,2" />
+                    </Style>
+                </StackPanel.Resources>
+                
+                <Button x:Name="CheckResultsButton" Content="Check Results" Click="CheckResultsButtonClick" />
+                <Button x:Name="SaveCSVButton" Content="Save CSV" Click="SaveCSVButtonClick" />
+            </StackPanel>
+
+            <!-- Data Display -->
+            <Grid Grid.Row="2" Margin="0,5,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.Resources>
+                    <Style x:Key="AxElementStyle" TargetType="Border">
+                        <Setter Property="Margin" Value="2,2,2,2" />
+                        <Setter Property="CornerRadius" Value="5,5,5,5" />
+                        <Setter Property="Background" Value="#FF535454" />
+                    </Style>
+                    <Style x:Key="AxControlsPanelStyle" TargetType="StackPanel">
+                        <Setter Property="Margin" Value="2,2,2,2" />
+                        <Setter Property="VerticalAlignment" Value="Top" />
+                    </Style>
+                    <Style x:Key="AxEnabledCheckBoxStyle" TargetType="CheckBox">
+                        <Setter Property="Width" Value="14" />
+                        <Setter Property="Height" Value="14" />
+                        <Setter Property="Margin" Value="2,2,1,1" />
+                        <Setter Property="Background" Value="#FFE2E2E2" />
+                        <Setter Property="BorderThickness" Value="0" />
+                    </Style>
+                    <Style x:Key="AxPlotButtonStyle" TargetType="Button">
+                        <Setter Property="Width" Value="14" />
+                        <Setter Property="Height" Value="14" />
+                        <Setter Property="Margin" Value="0,1,1,1" />
+                        <Setter Property="Padding" Value="0,0,0,0" />
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                        <Setter Property="FontSize" Value="9" />
+                    </Style>
+                    <Style x:Key="AxLabelStyle" TargetType="Label">
+                        <Setter Property="FontFamily" Value="Arial Black" />
+                        <Setter Property="FontSize" Value="12" />
+                        <Setter Property="Foreground" Value="#FFCEFBCA" />
+                        <Setter Property="Margin" Value="2,2,2,2" />
+                        <Setter Property="VerticalAlignment" Value="Bottom" />
+                        <Setter Property="HorizontalAlignment" Value="Left" />
+                    </Style>
+                    <Style x:Key="AxDisplayUnitStyle" TargetType="Label">
+                        <Setter Property="FontFamily" Value="Lucida Sans" />
+                        <Setter Property="FontSize" Value="16" />
+                        <Setter Property="Foreground" Value="#FFF4FDA3" />
+                        <Setter Property="FontWeight" Value="Bold" />
+                        <Setter Property="Margin" Value="2,2,2,2" />
+                        <Setter Property="VerticalAlignment" Value="Bottom" />
+                        <Setter Property="HorizontalAlignment" Value="Right" />
+                    </Style>
+                    <Style x:Key="AxDisplayValueStyle" TargetType="Label">
+                        <Setter Property="FontFamily" Value="Arial Black" />
+                        <Setter Property="FontSize" Value="18" />
+                        <Setter Property="FontWeight" Value="DemiBold" />
+                        <Setter Property="Foreground" Value="White" />
+                        <Setter Property="Margin" Value="2,2,2,2" />
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                    </Style>
+                </Grid.Resources>
+
+                <!-- A1 -->
+                <Border x:Name="DataPortBorderA1" Grid.Row="0" Grid.Column="2" Style="{StaticResource AxElementStyle}" IsEnabled="{Binding IsChecked, ElementName=A1EnabledCheckBox}">
+                    <Grid>
+                        <Label Content="A1" Style="{StaticResource AxLabelStyle}" />
+                        <Label x:Name="A1DisplayUnit" Style="{StaticResource AxDisplayUnitStyle}" />
+                        <Label x:Name="A1DisplayValue" Style="{StaticResource AxDisplayValueStyle}" />
+                    </Grid>
+                </Border>
+                <StackPanel x:Name="DataPortControlsA1" Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Style="{StaticResource AxControlsPanelStyle}">
+                    <CheckBox x:Name="A1EnabledCheckBox"  IsChecked="True" Style="{StaticResource AxEnabledCheckBoxStyle}" />
+                    <Button x:Name="A1PlotButton" IsEnabled="{Binding IsChecked, ElementName=A1EnabledCheckBox}" Content="P" Style="{StaticResource AxPlotButtonStyle}" />
+                </StackPanel>
+
+                <!-- A2 -->
+                <Border x:Name="DataPortBorderA2" Grid.Row="0" Grid.Column="3" Style="{StaticResource AxElementStyle}" IsEnabled="{Binding IsChecked, ElementName=A2EnabledCheckBox}">
+                    <Grid>
+                        <Label Content="A2" Style="{StaticResource AxLabelStyle}" />
+                        <Label x:Name="A2DisplayUnit" Style="{StaticResource AxDisplayUnitStyle}" />
+                        <Label x:Name="A2DisplayValue" Style="{StaticResource AxDisplayValueStyle}" />
+                    </Grid>
+                </Border>
+                <StackPanel x:Name="DataPortControlsA2" Grid.Row="0" Grid.Column="3" Orientation="Horizontal" Style="{StaticResource AxControlsPanelStyle}">
+                    <CheckBox x:Name="A2EnabledCheckBox"  IsChecked="True" Style="{StaticResource AxEnabledCheckBoxStyle}" />
+                    <Button x:Name="A2PlotButton" IsEnabled="{Binding IsChecked, ElementName=A2EnabledCheckBox}" Content="P" Style="{StaticResource AxPlotButtonStyle}" />
+                </StackPanel>
+
+                <!-- A3 -->
+                <Border x:Name="DataPortBorderA3" Grid.Row="0" Grid.Column="4" Style="{StaticResource AxElementStyle}" IsEnabled="{Binding IsChecked, ElementName=A3EnabledCheckBox}">
+                    <Grid>
+                        <Label Content="A3" Style="{StaticResource AxLabelStyle}" />
+                        <Label x:Name="A3DisplayUnit" Style="{StaticResource AxDisplayUnitStyle}" />
+                        <Label x:Name="A3DisplayValue" Style="{StaticResource AxDisplayValueStyle}" />
+                    </Grid>
+                </Border>
+                <StackPanel x:Name="DataPortControlsA3" Grid.Row="0" Grid.Column="4" Orientation="Horizontal" Style="{StaticResource AxControlsPanelStyle}">
+                    <CheckBox x:Name="A3EnabledCheckBox"  IsChecked="True" Style="{StaticResource AxEnabledCheckBoxStyle}" />
+                    <Button x:Name="A3PlotButton" IsEnabled="{Binding IsChecked, ElementName=A3EnabledCheckBox}" Content="P" Style="{StaticResource AxPlotButtonStyle}" />
+                </StackPanel>
+
+                <!-- A4 -->
+                <Border x:Name="DataPortBorderA4" Grid.Row="1" Grid.Column="6" Style="{StaticResource AxElementStyle}" IsEnabled="{Binding IsChecked, ElementName=A4EnabledCheckBox}">
+                    <Grid>
+                        <Label Content="A4" Style="{StaticResource AxLabelStyle}" />
+                        <Label x:Name="A4DisplayUnit" Style="{StaticResource AxDisplayUnitStyle}" />
+                        <Label x:Name="A4DisplayValue" Style="{StaticResource AxDisplayValueStyle}" />
+                    </Grid>
+                </Border>
+                <StackPanel x:Name="DataPortControlsA4" Grid.Row="1" Grid.Column="6" Orientation="Horizontal" Style="{StaticResource AxControlsPanelStyle}">
+                    <CheckBox x:Name="A4EnabledCheckBox"  IsChecked="True" Style="{StaticResource AxEnabledCheckBoxStyle}" />
+                    <Button x:Name="A4PlotButton" IsEnabled="{Binding IsChecked, ElementName=A4EnabledCheckBox}" Content="P" Style="{StaticResource AxPlotButtonStyle}" />
+                </StackPanel>
+
+                <!-- A5 -->
+                <Border x:Name="DataPortBorderA5" Grid.Row="2" Grid.Column="6" Style="{StaticResource AxElementStyle}" IsEnabled="{Binding IsChecked, ElementName=A5EnabledCheckBox}">
+                    <Grid>
+                        <Label Content="A5" Style="{StaticResource AxLabelStyle}" />
+                        <Label x:Name="A5DisplayUnit" Style="{StaticResource AxDisplayUnitStyle}" />
+                        <Label x:Name="A5DisplayValue" Style="{StaticResource AxDisplayValueStyle}" />
+                    </Grid>
+                </Border>
+                <StackPanel x:Name="DataPortControlsA5" Grid.Row="2" Grid.Column="6" Orientation="Horizontal" Style="{StaticResource AxControlsPanelStyle}">
+                    <CheckBox x:Name="A5EnabledCheckBox"  IsChecked="True" Style="{StaticResource AxEnabledCheckBoxStyle}" />
+                    <Button x:Name="A5PlotButton" IsEnabled="{Binding IsChecked, ElementName=A5EnabledCheckBox}" Content="P" Style="{StaticResource AxPlotButtonStyle}" />
+                </StackPanel>
+
+                <!-- A6 -->
+                <Border x:Name="DataPortBorderA6" Grid.Row="3" Grid.Column="6" Style="{StaticResource AxElementStyle}" IsEnabled="{Binding IsChecked, ElementName=A6EnabledCheckBox}">
+                    <Grid>
+                        <Label Content="A6" Style="{StaticResource AxLabelStyle}" />
+                        <Label x:Name="A6DisplayUnit" Style="{StaticResource AxDisplayUnitStyle}" />
+                        <Label x:Name="A6DisplayValue" Style="{StaticResource AxDisplayValueStyle}" />
+                    </Grid>
+                </Border>
+                <StackPanel x:Name="DataPortControlsA6" Grid.Row="3" Grid.Column="6" Orientation="Horizontal" Style="{StaticResource AxControlsPanelStyle}">
+                    <CheckBox x:Name="A6EnabledCheckBox"  IsChecked="True" Style="{StaticResource AxEnabledCheckBoxStyle}" />
+                    <Button x:Name="A6PlotButton" IsEnabled="{Binding IsChecked, ElementName=A6EnabledCheckBox}" Content="P" Style="{StaticResource AxPlotButtonStyle}" />
+                </StackPanel>
+
+                <!-- A7 -->
+                <Border x:Name="DataPortBorderA7" Grid.Row="4" Grid.Column="6" Style="{StaticResource AxElementStyle}" IsEnabled="{Binding IsChecked, ElementName=A7EnabledCheckBox}">
+                    <Grid>
+                        <Label Content="A7" Style="{StaticResource AxLabelStyle}" />
+                        <Label x:Name="A7DisplayUnit" Style="{StaticResource AxDisplayUnitStyle}" />
+                        <Label x:Name="A7DisplayValue" Style="{StaticResource AxDisplayValueStyle}" />
+                    </Grid>
+                </Border>
+                <StackPanel x:Name="DataPortControlsA7" Grid.Row="4" Grid.Column="6" Orientation="Horizontal" Style="{StaticResource AxControlsPanelStyle}">
+                    <CheckBox x:Name="A7EnabledCheckBox"  IsChecked="True" Style="{StaticResource AxEnabledCheckBoxStyle}" />
+                    <Button x:Name="A7PlotButton" IsEnabled="{Binding IsChecked, ElementName=A7EnabledCheckBox}" Content="P" Style="{StaticResource AxPlotButtonStyle}" />
+                </StackPanel>
+
+                <!-- A8 -->
+                <Border x:Name="DataPortBorderA8" Grid.Row="5" Grid.Column="6" Style="{StaticResource AxElementStyle}" IsEnabled="{Binding IsChecked, ElementName=A8EnabledCheckBox}">
+                    <Grid>
+                        <Label Content="A8" Style="{StaticResource AxLabelStyle}" />
+                        <Label x:Name="A8DisplayUnit" Style="{StaticResource AxDisplayUnitStyle}" />
+                        <Label x:Name="A8DisplayValue" Style="{StaticResource AxDisplayValueStyle}" />
+                    </Grid>
+                </Border>
+                <StackPanel x:Name="DataPortControlsA8" Grid.Row="5" Grid.Column="6" Orientation="Horizontal" Style="{StaticResource AxControlsPanelStyle}">
+                    <CheckBox x:Name="A8EnabledCheckBox"  IsChecked="True" Style="{StaticResource AxEnabledCheckBoxStyle}" />
+                    <Button x:Name="A8PlotButton" IsEnabled="{Binding IsChecked, ElementName=A8EnabledCheckBox}" Content="P" Style="{StaticResource AxPlotButtonStyle}" />
+                </StackPanel>
+
+                <!-- A9 -->
+                <Border x:Name="DataPortBorderA9" Grid.Row="6" Grid.Column="4" Style="{StaticResource AxElementStyle}" IsEnabled="{Binding IsChecked, ElementName=A9EnabledCheckBox}">
+                    <Grid>
+                        <Label Content="A9" Style="{StaticResource AxLabelStyle}" />
+                        <Label x:Name="A9DisplayUnit" Style="{StaticResource AxDisplayUnitStyle}" />
+                        <Label x:Name="A9DisplayValue" Style="{StaticResource AxDisplayValueStyle}" />
+                    </Grid>
+                </Border>
+                <StackPanel x:Name="DataPortControlsA9" Grid.Row="6" Grid.Column="4" Orientation="Horizontal" Style="{StaticResource AxControlsPanelStyle}">
+                    <CheckBox x:Name="A9EnabledCheckBox"  IsChecked="True" Style="{StaticResource AxEnabledCheckBoxStyle}" />
+                    <Button x:Name="A9PlotButton" IsEnabled="{Binding IsChecked, ElementName=A9EnabledCheckBox}" Content="P" Style="{StaticResource AxPlotButtonStyle}" />
+                </StackPanel>
+
+                <!-- A10 -->
+                <Border x:Name="DataPortBorderA10" Grid.Row="6" Grid.Column="3" Style="{StaticResource AxElementStyle}" IsEnabled="{Binding IsChecked, ElementName=A10EnabledCheckBox}">
+                    <Grid>
+                        <Label Content="A10" Style="{StaticResource AxLabelStyle}" />
+                        <Label x:Name="A10DisplayUnit" Style="{StaticResource AxDisplayUnitStyle}" />
+                        <Label x:Name="A10DisplayValue" Style="{StaticResource AxDisplayValueStyle}" />
+                    </Grid>
+                </Border>
+                <StackPanel x:Name="DataPortControlsA10" Grid.Row="6" Grid.Column="3" Orientation="Horizontal" Style="{StaticResource AxControlsPanelStyle}">
+                    <CheckBox x:Name="A10EnabledCheckBox"  IsChecked="True" Style="{StaticResource AxEnabledCheckBoxStyle}" />
+                    <Button x:Name="A10PlotButton" IsEnabled="{Binding IsChecked, ElementName=A10EnabledCheckBox}" Content="P" Style="{StaticResource AxPlotButtonStyle}" />
+                </StackPanel>
+
+                <!-- A11 -->
+                <Border x:Name="DataPortBorderA11" Grid.Row="6" Grid.Column="2" Style="{StaticResource AxElementStyle}" IsEnabled="{Binding IsChecked, ElementName=A11EnabledCheckBox}">
+                    <Grid>
+                        <Label Content="A11" Style="{StaticResource AxLabelStyle}" />
+                        <Label x:Name="A11DisplayUnit" Style="{StaticResource AxDisplayUnitStyle}" />
+                        <Label x:Name="A11DisplayValue" Style="{StaticResource AxDisplayValueStyle}" />
+                    </Grid>
+                </Border>
+                <StackPanel x:Name="DataPortControlsA11" Grid.Row="6" Grid.Column="2" Orientation="Horizontal" Style="{StaticResource AxControlsPanelStyle}">
+                    <CheckBox x:Name="A11EnabledCheckBox"  IsChecked="True" Style="{StaticResource AxEnabledCheckBoxStyle}" />
+                    <Button x:Name="A11PlotButton" IsEnabled="{Binding IsChecked, ElementName=A11EnabledCheckBox}" Content="P" Style="{StaticResource AxPlotButtonStyle}" />
+                </StackPanel>
+
+                <!-- A12 -->
+                <Border x:Name="DataPortBorderA12" Grid.Row="5" Grid.Column="0" Style="{StaticResource AxElementStyle}" IsEnabled="{Binding IsChecked, ElementName=A12EnabledCheckBox}">
+                    <Grid>
+                        <Label Content="A12" Style="{StaticResource AxLabelStyle}" />
+                        <Label x:Name="A12DisplayUnit" Style="{StaticResource AxDisplayUnitStyle}" />
+                        <Label x:Name="A12DisplayValue" Style="{StaticResource AxDisplayValueStyle}" />
+                    </Grid>
+                </Border>
+                <StackPanel x:Name="DataPortControlsA12" Grid.Row="5" Grid.Column="0" Orientation="Horizontal" Style="{StaticResource AxControlsPanelStyle}">
+                    <CheckBox x:Name="A12EnabledCheckBox"  IsChecked="True" Style="{StaticResource AxEnabledCheckBoxStyle}" />
+                    <Button x:Name="A12PlotButton" IsEnabled="{Binding IsChecked, ElementName=A12EnabledCheckBox}" Content="P" Style="{StaticResource AxPlotButtonStyle}" />
+                </StackPanel>
+
+                <!-- A13 -->
+                <Border x:Name="DataPortBorderA13" Grid.Row="4" Grid.Column="0" Style="{StaticResource AxElementStyle}" IsEnabled="{Binding IsChecked, ElementName=A13EnabledCheckBox}">
+                    <Grid>
+                        <Label Content="A13" Style="{StaticResource AxLabelStyle}" />
+                        <Label x:Name="A13DisplayUnit" Style="{StaticResource AxDisplayUnitStyle}" />
+                        <Label x:Name="A13DisplayValue" Style="{StaticResource AxDisplayValueStyle}" />
+                    </Grid>
+                </Border>
+                <StackPanel x:Name="DataPortControlsA13" Grid.Row="4" Grid.Column="0" Orientation="Horizontal" Style="{StaticResource AxControlsPanelStyle}">
+                    <CheckBox x:Name="A13EnabledCheckBox"  IsChecked="True" Style="{StaticResource AxEnabledCheckBoxStyle}" />
+                    <Button x:Name="A13PlotButton" IsEnabled="{Binding IsChecked, ElementName=A13EnabledCheckBox}" Content="P" Style="{StaticResource AxPlotButtonStyle}" />
+                </StackPanel>
+
+                <!-- A14 -->
+                <Border x:Name="DataPortBorderA14" Grid.Row="3" Grid.Column="0" Style="{StaticResource AxElementStyle}" IsEnabled="{Binding IsChecked, ElementName=A14EnabledCheckBox}">
+                    <Grid>
+                        <Label Content="A14" Style="{StaticResource AxLabelStyle}" />
+                        <Label x:Name="A14DisplayUnit" Style="{StaticResource AxDisplayUnitStyle}" />
+                        <Label x:Name="A14DisplayValue" Style="{StaticResource AxDisplayValueStyle}" />
+                    </Grid>
+                </Border>
+                <StackPanel x:Name="DataPortControlsA14" Grid.Row="3" Grid.Column="0" Orientation="Horizontal" Style="{StaticResource AxControlsPanelStyle}">
+                    <CheckBox x:Name="A14EnabledCheckBox"  IsChecked="True" Style="{StaticResource AxEnabledCheckBoxStyle}" />
+                    <Button x:Name="A14PlotButton" IsEnabled="{Binding IsChecked, ElementName=A14EnabledCheckBox}" Content="P" Style="{StaticResource AxPlotButtonStyle}" />
+                </StackPanel>
+
+                <!-- A15 -->
+                <Border x:Name="DataPortBorderA15" Grid.Row="2" Grid.Column="0" Style="{StaticResource AxElementStyle}" IsEnabled="{Binding IsChecked, ElementName=A15EnabledCheckBox}">
+                    <Grid>
+                        <Label Content="A15" Style="{StaticResource AxLabelStyle}" />
+                        <Label x:Name="A15DisplayUnit" Style="{StaticResource AxDisplayUnitStyle}" />
+                        <Label x:Name="A15DisplayValue" Style="{StaticResource AxDisplayValueStyle}" />
+                    </Grid>
+                </Border>
+                <StackPanel x:Name="DataPortControlsA15" Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Style="{StaticResource AxControlsPanelStyle}">
+                    <CheckBox x:Name="A15EnabledCheckBox"  IsChecked="True" Style="{StaticResource AxEnabledCheckBoxStyle}" />
+                    <Button x:Name="A15PlotButton" IsEnabled="{Binding IsChecked, ElementName=A15EnabledCheckBox}" Content="P" Style="{StaticResource AxPlotButtonStyle}" />
+                </StackPanel>
+
+                <!-- A16 -->
+                <Border x:Name="DataPortBorderA16" Grid.Row="1" Grid.Column="0" Style="{StaticResource AxElementStyle}" IsEnabled="{Binding IsChecked, ElementName=A16EnabledCheckBox}">
+                    <Grid>
+                        <Label Content="A16" Style="{StaticResource AxLabelStyle}" />
+                        <Label x:Name="A16DisplayUnit" Style="{StaticResource AxDisplayUnitStyle}" />
+                        <Label x:Name="A16DisplayValue" Style="{StaticResource AxDisplayValueStyle}" />
+                    </Grid>
+                </Border>
+                <StackPanel x:Name="DataPortControlsA16" Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Style="{StaticResource AxControlsPanelStyle}">
+                    <CheckBox x:Name="A16EnabledCheckBox"  IsChecked="True" Style="{StaticResource AxEnabledCheckBoxStyle}" />
+                    <Button x:Name="A16PlotButton" IsEnabled="{Binding IsChecked, ElementName=A16EnabledCheckBox}" Content="P" Style="{StaticResource AxPlotButtonStyle}" />
+                </StackPanel>
+
+                <!-- Experiment Image -->
+                <Image x:Name="ExperimentImage" Grid.Row="1" Grid.Column="1" Grid.RowSpan="5" Grid.ColumnSpan="5" Margin="5,5,5,5" />
+            </Grid>
+        </Grid>
+
+        <!-- Experiments List -->
+        <Grid Grid.Row="2" Grid.Column="0" Margin="2,5,5,2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Experiments" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+            <TreeView x:Name="ExperimentsListView" Grid.Row="1" Margin="2,5,2,5" d:ItemsSource="{d:SampleData ItemCount=5}" SelectedItemChanged="OnExperimentsListViewItemChanged">
+            </TreeView>
+        </Grid>
+
+        <!-- Procedure -->
+        <Grid Grid.Row="2" Grid.Column="4" Margin="2,5,5,2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Procedure" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+            <ScrollViewer Grid.Row="1" Margin="2,5,2,5">
+                <TextBlock x:Name="ProcedureTextBlock" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" />
+            </ScrollViewer>
+        </Grid>
+        
+        <!-- Top Icon -->
+        <Image Panel.ZIndex="100" Grid.Row="1" Grid.RowSpan="1" Grid.Column="4" HorizontalAlignment="Right" Source="/Assets/ttech.png" />
+    </Grid>
+</Window>

@@ -1,0 +1,221 @@
+﻿<Window x:Class="DataAcquisition.Windows.ExperimentsManagementWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DataAcquisition.Windows"
+        mc:Ignorable="d"
+        Title="Experiments Management"
+        Width="650" MinWidth="550"
+        Height="650" MinHeight="620"
+        FontSize="14" Closed="OnWindowClosed">
+
+    <Window.Resources>
+        <ResourceDictionary>
+
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <!-- Password View -->
+        <Border x:Name="PasswordView" Visibility="Hidden" Grid.RowSpan="2" Panel.ZIndex="100" Background="Gray">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="400"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="36"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="36"/>
+                    <RowDefinition Height="15"/>
+                    <RowDefinition Height="36"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Enter password to proceed further" Grid.Row="1" Grid.Column="1" Foreground="White" FontSize="16" />
+                <PasswordBox x:Name="PasswordText" Grid.Row="3" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyDown="OnPasswordTextKeyDown" />
+                <TextBlock x:Name="PasswordValidation" Grid.Row="5" Grid.Column="1" Foreground="#FFFBD6D6" />
+                <StackPanel Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Button x:Name="PasswordOkButton" Content="Ok" Width="120" Click="OnPasswordOkButtonClicked" IsDefault="True" Margin="2,2,2,2" />
+                    <Button x:Name="PasswordCancelButton" Content="Cancel" Width="120" Click="OnPasswordCancelButtonClicked" IsCancel="True" Margin="2,2,2,2" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- PCB View -->
+        <Border x:Name="PCBView" Visibility="Hidden" Grid.RowSpan="2" Panel.ZIndex="100" Background="#BF7A7B00">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="400"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="36"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="36"/>
+                    <RowDefinition Height="15"/>
+                    <RowDefinition Height="36"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="What is the name of PCB?" Grid.Row="1" Grid.Column="1" Foreground="White" FontSize="16" />
+                <TextBox x:Name="PCBText" Grid.Row="3" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyDown="OnPCBTextKeyDown" />
+                <TextBlock x:Name="PCBValidation" Text="" Grid.Row="5" Grid.Column="1" Foreground="#FF880000" FontSize="16" />
+                <StackPanel Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Button x:Name="PCBOkButton" Content="Ok" Width="120" Click="OnPCBOkButtonClicked" IsDefault="True" Margin="2,2,2,2" />
+                    <Button x:Name="PCBCancelButton" Content="Cancel" Width="120" Click="OnPCBCancelButtonClicked" IsCancel="True" Margin="2,2,2,2" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Circuit View -->
+        <Border x:Name="CircuitView" Visibility="Hidden" Grid.RowSpan="2" Panel.ZIndex="100" Background="{Binding Background, ElementName=PCBView}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="400"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="36"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="36"/>
+                    <RowDefinition Height="15"/>
+                    <RowDefinition Height="36"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="What is the name of Circuit?" Grid.Row="1" Grid.Column="1" Foreground="White" FontSize="16" />
+                <TextBox x:Name="CircuitText" Grid.Row="3" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyDown="OnCircuitTextKeyDown" />
+                <TextBlock x:Name="CircuitValidation" Text="" Grid.Row="5" Grid.Column="1" Foreground="#FF880000" FontSize="16" />
+                <StackPanel Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Button x:Name="CircuitOkButton" Content="Ok" Width="120" Click="OnCircuitOkButtonClicked" IsDefault="True" Margin="2,2,2,2" />
+                    <Button x:Name="CircuitCancelButton" Content="Cancel" Width="120" Click="OnCircuitCancelButtonClicked" IsCancel="True" Margin="2,2,2,2" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Main Functions -->
+        <Grid Margin="5,5,5,5">
+            <Grid.Resources>
+                <ResourceDictionary>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="3,3,3,3" />
+                    </Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                    </Style>
+                    <Style TargetType="ListView">
+                        <Setter Property="Margin" Value="2,2,2,2" />
+                        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+                        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Margin" Value="0,0,0,0" />
+                    </Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="1,2,2,1" />
+                        <Setter Property="Height" Value="30" />
+                    </Style>
+                </ResourceDictionary>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="60"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- PCBs Selection -->
+            <Border Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="AliceBlue" />
+            <TextBlock Text="PCBs" Grid.Column="0" Grid.ColumnSpan="2" FontWeight="Bold" />
+            <ListView x:Name="PcbSelectionListView" d:ItemsSource="{d:SampleData ItemCount=5}"
+              Grid.Row="1" Grid.Column="0"
+              SelectionChanged="PcbSelectionListViewSelectionChanged">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Title}" Header="Name" Width="120" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <StackPanel Grid.Row="1" Grid.Column="1">
+                <Button x:Name="PcbAddButton" Content="Add" Click="PcbAddButton_Click" />
+                <Button x:Name="PcbEditButton" Content="Edit" Click="PcbEditButton_Click" />
+                <Button x:Name="PcbRemoveButton" Content="Remove" Click="PcbRemoveButton_Click" />
+            </StackPanel>
+
+            <!-- Circuits Selection -->
+            <Border Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#FFF0FFDC" />
+            <TextBlock Text="Circuits" Grid.Column="3" Grid.ColumnSpan="2" FontWeight="Bold" />
+            <ListView x:Name="CircuitSelectionListView" d:ItemsSource="{d:SampleData ItemCount=5}"
+              Grid.Row="1" Grid.Column="3"
+              SelectionChanged="CircuitSelectionListViewSelectionChanged">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Title}" Header="Name" Width="120" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <StackPanel Grid.Row="1" Grid.Column="4">
+                <Button x:Name="CircuitAddButton" Content="Add" Click="CircuitAddButton_Click" />
+                <Button x:Name="CircuitEditButton" Content="Edit" Click="CircuitEditButton_Click" />
+                <Button x:Name="CircuitRemoveButton" Content="Remove" Click="CircuitRemoveButton_Click" />
+            </StackPanel>
+
+            <!-- Experiment Selection -->
+            <Border Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#FFFFFCDC" />
+            <TextBlock Text="Experiments" Grid.Column="6" Grid.ColumnSpan="2" FontWeight="Bold" />
+            <ListView x:Name="ExperimentSelectionListView" d:ItemsSource="{d:SampleData ItemCount=5}"
+              Grid.Row="1" Grid.Column="6"
+              SelectionChanged="ExperimentSelectionListViewSelectionChanged">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Title}" Header="Name" Width="120" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <StackPanel Grid.Row="1" Grid.Column="7">
+                <Button x:Name="ExperimentAddButton" Content="Add" Click="ExperimentAddButton_Click" />
+                <Button x:Name="ExperimentEditButton" Content="Edit" Click="ExperimentEditButton_Click" />
+                <Button x:Name="ExperimentRemoveButton" Content="Remove" Click="ExperimentRemoveButton_Click" />
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="90"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Margin="2,2,2,2" Content="Close" Grid.Column="1" Click="OnCloseButtonClick" />
+            <Button Margin="2,2,2,2" Content="Ok" Grid.Column="2" Click="OnOkButtonClick" />
+        </Grid>
+    </Grid>
+</Window>

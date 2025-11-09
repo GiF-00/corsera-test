@@ -1,0 +1,260 @@
+﻿<Window x:Class="DataAcquisition.Windows.ExperimentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DataAcquisition.Windows"
+        mc:Ignorable="d"
+        Title="Experiment"
+        Width="600" MinWidth="550"
+        Height="620" MinHeight="620"
+        FontSize="12">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="198*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <TabControl>
+            <TabItem Header="General Information">
+                <Grid Margin="5,5,5,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="75"/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Name" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <TextBox x:Name="ExperimentName" Grid.Column="1" Grid.ColumnSpan="2" VerticalContentAlignment="Center" TextChanged="ExperimentNameTextChanged" Margin="2,2,2,2" />
+
+                    <TextBlock Text="Image" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <Button x:Name="ImageButton" Content="Select" Grid.Row="1" Grid.Column="1" Margin="2,2,2,2" Click="OnImageButtonClicked" />
+                    <TextBox x:Name="ImageFile" Grid.Row="1" Grid.Column="2" VerticalContentAlignment="Center" IsEnabled="False" Margin="2,2,2,2" />
+                    <Image x:Name="Image" Grid.Row="2" Grid.ColumnSpan="3" />
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Data Ranges">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="75"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Register Settings - Titles -->
+                    <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Content="Enabled" FontStyle="Italic" Width="Auto" Grid.ColumnSpan="2" />
+                    <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Content="Minimum Value" FontStyle="Italic" Width="Auto" />
+                    <Label Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" Content="Maximum Value" FontStyle="Italic" Width="Auto" />
+                    <Label Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" Content="Unit" FontStyle="Italic" Width="Auto" />
+
+                    <!-- Register Selection CheckBoxes -->
+                    <CheckBox Grid.Row="1"  x:Name="A1SelectionCheckBox"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <CheckBox Grid.Row="2"  x:Name="A2SelectionCheckBox"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <CheckBox Grid.Row="3"  x:Name="A3SelectionCheckBox"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <CheckBox Grid.Row="4"  x:Name="A4SelectionCheckBox"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <CheckBox Grid.Row="5"  x:Name="A5SelectionCheckBox"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <CheckBox Grid.Row="6"  x:Name="A6SelectionCheckBox"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <CheckBox Grid.Row="7"  x:Name="A7SelectionCheckBox"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <CheckBox Grid.Row="8"  x:Name="A8SelectionCheckBox"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <CheckBox Grid.Row="9"  x:Name="A9SelectionCheckBox"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <CheckBox Grid.Row="10" x:Name="A10SelectionCheckBox" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <CheckBox Grid.Row="11" x:Name="A11SelectionCheckBox" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <CheckBox Grid.Row="12" x:Name="A12SelectionCheckBox" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <CheckBox Grid.Row="13" x:Name="A13SelectionCheckBox" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <CheckBox Grid.Row="14" x:Name="A14SelectionCheckBox" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <CheckBox Grid.Row="15" x:Name="A15SelectionCheckBox" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <CheckBox Grid.Row="16" x:Name="A16SelectionCheckBox" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                    <!-- Register Names -->
+                    <Label Grid.Row="1" Grid.Column="1" Content="A1" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,2,0,2"   IsEnabled="{Binding IsChecked, ElementName=A1SelectionCheckBox}" />
+                    <Label Grid.Row="2" Grid.Column="1" Content="A2" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,2,0,2"   IsEnabled="{Binding IsChecked, ElementName=A2SelectionCheckBox}" />
+                    <Label Grid.Row="3" Grid.Column="1" Content="A3" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,2,0,2"   IsEnabled="{Binding IsChecked, ElementName=A3SelectionCheckBox}" />
+                    <Label Grid.Row="4" Grid.Column="1" Content="A4" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,2,0,2"   IsEnabled="{Binding IsChecked, ElementName=A4SelectionCheckBox}" />
+                    <Label Grid.Row="5" Grid.Column="1" Content="A5" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,2,0,2"   IsEnabled="{Binding IsChecked, ElementName=A5SelectionCheckBox}" />
+                    <Label Grid.Row="6" Grid.Column="1" Content="A6" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,2,0,2"   IsEnabled="{Binding IsChecked, ElementName=A6SelectionCheckBox}" />
+                    <Label Grid.Row="7" Grid.Column="1" Content="A7" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,2,0,2"   IsEnabled="{Binding IsChecked, ElementName=A7SelectionCheckBox}" />
+                    <Label Grid.Row="8" Grid.Column="1" Content="A8" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,2,0,2"   IsEnabled="{Binding IsChecked, ElementName=A8SelectionCheckBox}" />
+                    <Label Grid.Row="9" Grid.Column="1" Content="A9" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,2,0,2"   IsEnabled="{Binding IsChecked, ElementName=A9SelectionCheckBox}" />
+                    <Label Grid.Row="10" Grid.Column="1" Content="A10" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,2,0,2" IsEnabled="{Binding IsChecked, ElementName=A10SelectionCheckBox}" />
+                    <Label Grid.Row="11" Grid.Column="1" Content="A11" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,2,0,2" IsEnabled="{Binding IsChecked, ElementName=A11SelectionCheckBox}" />
+                    <Label Grid.Row="12" Grid.Column="1" Content="A12" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,2,0,2" IsEnabled="{Binding IsChecked, ElementName=A12SelectionCheckBox}" />
+                    <Label Grid.Row="13" Grid.Column="1" Content="A13" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,2,0,2" IsEnabled="{Binding IsChecked, ElementName=A13SelectionCheckBox}" />
+                    <Label Grid.Row="14" Grid.Column="1" Content="A14" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,2,0,2" IsEnabled="{Binding IsChecked, ElementName=A14SelectionCheckBox}" />
+                    <Label Grid.Row="15" Grid.Column="1" Content="A15" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,2,0,2" IsEnabled="{Binding IsChecked, ElementName=A15SelectionCheckBox}" />
+                    <Label Grid.Row="16" Grid.Column="1" Content="A16" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,2,0,2" IsEnabled="{Binding IsChecked, ElementName=A16SelectionCheckBox}" />
+
+                    <!-- Minimum Value -->
+                    <TextBox Grid.Row="1" Grid.Column="2" x:Name="MinValueA1" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A1SelectionCheckBox}"  />
+                    <TextBox Grid.Row="2" Grid.Column="2" x:Name="MinValueA2" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A2SelectionCheckBox}"  />
+                    <TextBox Grid.Row="3" Grid.Column="2" x:Name="MinValueA3" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A3SelectionCheckBox}"  />
+                    <TextBox Grid.Row="4" Grid.Column="2" x:Name="MinValueA4" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A4SelectionCheckBox}"  />
+                    <TextBox Grid.Row="5" Grid.Column="2" x:Name="MinValueA5" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A5SelectionCheckBox}"  />
+                    <TextBox Grid.Row="6" Grid.Column="2" x:Name="MinValueA6" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A6SelectionCheckBox}"  />
+                    <TextBox Grid.Row="7" Grid.Column="2" x:Name="MinValueA7" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A7SelectionCheckBox}"  />
+                    <TextBox Grid.Row="8" Grid.Column="2" x:Name="MinValueA8" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A8SelectionCheckBox}"  />
+                    <TextBox Grid.Row="9" Grid.Column="2" x:Name="MinValueA9" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A9SelectionCheckBox}"  />
+                    <TextBox Grid.Row="10" Grid.Column="2" x:Name="MinValueA10" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2" IsEnabled="{Binding IsChecked, ElementName=A10SelectionCheckBox}" />
+                    <TextBox Grid.Row="11" Grid.Column="2" x:Name="MinValueA11" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2" IsEnabled="{Binding IsChecked, ElementName=A11SelectionCheckBox}" />
+                    <TextBox Grid.Row="12" Grid.Column="2" x:Name="MinValueA12" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2" IsEnabled="{Binding IsChecked, ElementName=A12SelectionCheckBox}" />
+                    <TextBox Grid.Row="13" Grid.Column="2" x:Name="MinValueA13" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2" IsEnabled="{Binding IsChecked, ElementName=A13SelectionCheckBox}" />
+                    <TextBox Grid.Row="14" Grid.Column="2" x:Name="MinValueA14" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2" IsEnabled="{Binding IsChecked, ElementName=A14SelectionCheckBox}" />
+                    <TextBox Grid.Row="15" Grid.Column="2" x:Name="MinValueA15" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2" IsEnabled="{Binding IsChecked, ElementName=A15SelectionCheckBox}" />
+                    <TextBox Grid.Row="16" Grid.Column="2" x:Name="MinValueA16" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2" IsEnabled="{Binding IsChecked, ElementName=A16SelectionCheckBox}" />
+
+                    <!-- Maximum Value -->
+                    <TextBox Grid.Row="1" Grid.Column="3" x:Name="MaxValueA1" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A1SelectionCheckBox}"  />
+                    <TextBox Grid.Row="2" Grid.Column="3" x:Name="MaxValueA2" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A2SelectionCheckBox}"  />
+                    <TextBox Grid.Row="3" Grid.Column="3" x:Name="MaxValueA3" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A3SelectionCheckBox}"  />
+                    <TextBox Grid.Row="4" Grid.Column="3" x:Name="MaxValueA4" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A4SelectionCheckBox}"  />
+                    <TextBox Grid.Row="5" Grid.Column="3" x:Name="MaxValueA5" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A5SelectionCheckBox}"  />
+                    <TextBox Grid.Row="6" Grid.Column="3" x:Name="MaxValueA6" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A6SelectionCheckBox}"  />
+                    <TextBox Grid.Row="7" Grid.Column="3" x:Name="MaxValueA7" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A7SelectionCheckBox}"  />
+                    <TextBox Grid.Row="8" Grid.Column="3" x:Name="MaxValueA8" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A8SelectionCheckBox}"  />
+                    <TextBox Grid.Row="9" Grid.Column="3" x:Name="MaxValueA9" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A9SelectionCheckBox}"  />
+                    <TextBox Grid.Row="10" Grid.Column="3" x:Name="MaxValueA10" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2" IsEnabled="{Binding IsChecked, ElementName=A10SelectionCheckBox}" />
+                    <TextBox Grid.Row="11" Grid.Column="3" x:Name="MaxValueA11" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2" IsEnabled="{Binding IsChecked, ElementName=A11SelectionCheckBox}" />
+                    <TextBox Grid.Row="12" Grid.Column="3" x:Name="MaxValueA12" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2" IsEnabled="{Binding IsChecked, ElementName=A12SelectionCheckBox}" />
+                    <TextBox Grid.Row="13" Grid.Column="3" x:Name="MaxValueA13" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2" IsEnabled="{Binding IsChecked, ElementName=A13SelectionCheckBox}" />
+                    <TextBox Grid.Row="14" Grid.Column="3" x:Name="MaxValueA14" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2" IsEnabled="{Binding IsChecked, ElementName=A14SelectionCheckBox}" />
+                    <TextBox Grid.Row="15" Grid.Column="3" x:Name="MaxValueA15" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2" IsEnabled="{Binding IsChecked, ElementName=A15SelectionCheckBox}" />
+                    <TextBox Grid.Row="16" Grid.Column="3" x:Name="MaxValueA16" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2" IsEnabled="{Binding IsChecked, ElementName=A16SelectionCheckBox}" />
+
+                    <!-- DisplayUnit -->
+                    <Label Grid.Row="1" Grid.Column="4" x:Name="DisplayUnitA1" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A1SelectionCheckBox}"  />
+                    <Label Grid.Row="2" Grid.Column="4" x:Name="DisplayUnitA2" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A2SelectionCheckBox}"  />
+                    <Label Grid.Row="3" Grid.Column="4" x:Name="DisplayUnitA3" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A3SelectionCheckBox}"  />
+                    <Label Grid.Row="4" Grid.Column="4" x:Name="DisplayUnitA4" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A4SelectionCheckBox}"  />
+                    <Label Grid.Row="5" Grid.Column="4" x:Name="DisplayUnitA5" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A5SelectionCheckBox}"  />
+                    <Label Grid.Row="6" Grid.Column="4" x:Name="DisplayUnitA6" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A6SelectionCheckBox}"  />
+                    <Label Grid.Row="7" Grid.Column="4" x:Name="DisplayUnitA7" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A7SelectionCheckBox}"  />
+                    <Label Grid.Row="8" Grid.Column="4" x:Name="DisplayUnitA8" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A8SelectionCheckBox}"  />
+                    <Label Grid.Row="9" Grid.Column="4" x:Name="DisplayUnitA9" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2"   IsEnabled="{Binding IsChecked, ElementName=A9SelectionCheckBox}"  />
+                    <Label Grid.Row="10" Grid.Column="4" x:Name="DisplayUnitA10" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2" IsEnabled="{Binding IsChecked, ElementName=A10SelectionCheckBox}" />
+                    <Label Grid.Row="11" Grid.Column="4" x:Name="DisplayUnitA11" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2" IsEnabled="{Binding IsChecked, ElementName=A11SelectionCheckBox}" />
+                    <Label Grid.Row="12" Grid.Column="4" x:Name="DisplayUnitA12" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2" IsEnabled="{Binding IsChecked, ElementName=A12SelectionCheckBox}" />
+                    <Label Grid.Row="13" Grid.Column="4" x:Name="DisplayUnitA13" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2" IsEnabled="{Binding IsChecked, ElementName=A13SelectionCheckBox}" />
+                    <Label Grid.Row="14" Grid.Column="4" x:Name="DisplayUnitA14" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2" IsEnabled="{Binding IsChecked, ElementName=A14SelectionCheckBox}" />
+                    <Label Grid.Row="15" Grid.Column="4" x:Name="DisplayUnitA15" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2" IsEnabled="{Binding IsChecked, ElementName=A15SelectionCheckBox}" />
+                    <Label Grid.Row="16" Grid.Column="4" x:Name="DisplayUnitA16" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2,2,2,2" IsEnabled="{Binding IsChecked, ElementName=A16SelectionCheckBox}" />
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Procedure">
+                <Grid>
+                    <TextBox x:Name="ProcedureTextBox" TextWrapping="Wrap" AcceptsReturn="True" Margin="5,5,5,5" AcceptsTab="True" VerticalScrollBarVisibility="Auto" />
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Error Messages">
+                <ScrollViewer>
+                    <StackPanel>
+                        <StackPanel.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Margin" Value="5,10,5,0" />
+                                <Setter Property="FontWeight" Value="DemiBold" />
+                            </Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="Margin" Value="5,5,5,5" />
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                                <Setter Property="AcceptsReturn" Value="True" />
+                                <Setter Property="AcceptsTab" Value="True" />
+                                <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
+                                <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+                                <Setter Property="MinLines" Value="5" />
+                            </Style>
+                        </StackPanel.Resources>
+                        <TextBlock Text="A1" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A1SelectionCheckBox}" />
+                        <TextBox x:Name="A1ErrorMessage" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A1SelectionCheckBox}" />
+
+                        <TextBlock Text="A2" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A2SelectionCheckBox}" />
+                        <TextBox x:Name="A2ErrorMessage" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A2SelectionCheckBox}" />
+
+                        <TextBlock Text="A3" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A3SelectionCheckBox}" />
+                        <TextBox x:Name="A3ErrorMessage" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A3SelectionCheckBox}" />
+
+                        <TextBlock Text="A4" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A4SelectionCheckBox}" />
+                        <TextBox x:Name="A4ErrorMessage" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A4SelectionCheckBox}" />
+
+                        <TextBlock Text="A5" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A5SelectionCheckBox}" />
+                        <TextBox x:Name="A5ErrorMessage" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A5SelectionCheckBox}" />
+
+                        <TextBlock Text="A6" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A6SelectionCheckBox}" />
+                        <TextBox x:Name="A6ErrorMessage" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A6SelectionCheckBox}" />
+
+                        <TextBlock Text="A7" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A7SelectionCheckBox}" />
+                        <TextBox x:Name="A7ErrorMessage" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A7SelectionCheckBox}" />
+
+                        <TextBlock Text="A8" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A8SelectionCheckBox}" />
+                        <TextBox x:Name="A8ErrorMessage" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A8SelectionCheckBox}" />
+
+                        <TextBlock Text="A9" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A9SelectionCheckBox}" />
+                        <TextBox x:Name="A9ErrorMessage" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A9SelectionCheckBox}" />
+
+                        <TextBlock Text="A10" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A10SelectionCheckBox}" />
+                        <TextBox x:Name="A10ErrorMessage" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A10SelectionCheckBox}" />
+
+                        <TextBlock Text="A11" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A11SelectionCheckBox}" />
+                        <TextBox x:Name="A11ErrorMessage" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A11SelectionCheckBox}" />
+
+                        <TextBlock Text="A12" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A12SelectionCheckBox}" />
+                        <TextBox x:Name="A12ErrorMessage" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A12SelectionCheckBox}" />
+
+                        <TextBlock Text="A13" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A13SelectionCheckBox}" />
+                        <TextBox x:Name="A13ErrorMessage" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A13SelectionCheckBox}" />
+
+                        <TextBlock Text="A14" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A14SelectionCheckBox}" />
+                        <TextBox x:Name="A14ErrorMessage" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A14SelectionCheckBox}" />
+
+                        <TextBlock Text="A15" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A15SelectionCheckBox}" />
+                        <TextBox x:Name="A15ErrorMessage" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A15SelectionCheckBox}" />
+
+                        <TextBlock Text="A16" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A16SelectionCheckBox}" />
+                        <TextBox x:Name="A16ErrorMessage" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=A16SelectionCheckBox}" />
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="90"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="CancelButton" Margin="2,2,2,2" Content="Cancel" Grid.Column="1" Click="OnCancelClick" />
+            <Button x:Name="OkButton" Margin="2,2,2,2" Content="Ok" Grid.Column="2" Click="OnOkClick" />
+        </Grid>
+    </Grid>
+</Window>

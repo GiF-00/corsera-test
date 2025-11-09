@@ -1,0 +1,61 @@
+﻿<Window x:Class="DataAcquisition.Windows.PlotWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:plot="clr-namespace:DataAcquisition.Controls"
+        xmlns:local="clr-namespace:DataAcquisition.Windows"
+        mc:Ignorable="d"
+        Title="Data Plot"
+        Width="680" MinWidth="550"
+        Height="520" MinHeight="620" Closing="OnWindowClosing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="265*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Margin="5,5,5,10">
+            <Label Content="Dump to CSV: " VerticalAlignment="Center" />
+            <Button x:Name="DumpButton" Content="Start" Width="60" Click="DumpButton_Click" />
+            <Label x:Name="DumpMessage" Content="" VerticalAlignment="Center" />
+        </StackPanel>
+
+        <Grid Grid.Row="1" Margin="5,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="X Axis" Grid.Column="0" FontWeight="Bold" />
+            <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" Margin="0,0,20,0">
+                <Label Content="Step:" VerticalAlignment="Center" />
+                <ComboBox x:Name="XAxisStep" Width="60" VerticalContentAlignment="Center" SelectionChanged="XAxisStep_SelectionChanged"/>
+            </StackPanel>
+
+            <Label Content="Y Axis" Grid.Column="1" FontWeight="Bold"  />
+            <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1" Margin="0,0,20,0">
+                <Label Content="Step:" VerticalAlignment="Center" />
+                <ComboBox x:Name="YAxisStep" Width="60" VerticalContentAlignment="Center" SelectionChanged="YAxisStep_SelectionChanged"/>
+                
+                <Label Content="Min:" VerticalAlignment="Center" />
+                <TextBox x:Name="YAxisMin" Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" TextChanged="OnYAxisMinTextChanged" />
+                
+                <Label Content="Max:" VerticalAlignment="Center" />
+                <TextBox x:Name="YAxisMax" Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" TextChanged="OnYAxisMaxTextChanged" />
+            </StackPanel>
+
+            <Label Content="Second Channel" Grid.Column="2" FontWeight="Bold"  />
+            <ComboBox x:Name="SecondChannel" Width="100" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" VerticalContentAlignment="Center" SelectionChanged="SecondChannel_SelectionChanged" />
+            
+        </Grid>
+
+        <plot:PlotControl x:Name="Plot" Grid.Row="2" Margin="0,10,0,0" />
+    </Grid>
+</Window>
